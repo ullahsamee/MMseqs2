@@ -22,6 +22,102 @@ MMseqs2 (Many-against-Many sequence searching) is a software suite to search and
 The MMseqs2 user guide is available in our [GitHub Wiki](https://github.com/soedinglab/mmseqs2/wiki) or as a [PDF file](https://mmseqs.com/latest/userguide.pdf) (Thanks to [pandoc](https://github.com/jgm/pandoc)!). The wiki also contains [tutorials](https://github.com/soedinglab/MMseqs2/wiki/Tutorials) to learn how to use MMseqs2 with real data. For questions please open an issue on [GitHub](https://github.com/soedinglab/MMseqs2/issues).
 Keep posted about MMseqs2 updates by following [Martin](https://bsky.app/profile/martinsteinegger.bsky.social) and [Milot](https://bsky.app/profile/milot.bsky.social).
 
+## 5090 Blackwell | CUDA 13.0 install from source in Linux
+```
+git clone https://github.com/soedinglab/MMseqs2.git
+cd MMseqs2
+mkdir build && cd build
+```		
+
+```
+cmake -DCMAKE_BUILD_TYPE=RELEASE
+-DCMAKE_INSTALL_PREFIX=/usr/local
+-DENABLE_CUDA=1
+-DCMAKE_CUDA_ARCHITECTURES="native" ..
+```
+
+```
+make -j24
+
+[  0%] Building CXX object lib/ksw2/CMakeFiles/ksw2.dir/ksw2_extz2_sse.cpp.o
+[  1%] Building CXX object lib/tantan/CMakeFiles/tantan.dir/tantan.cpp.o
+[  1%] Building C object lib/microtar/CMakeFiles/microtar.dir/microtar.c.o
+.
+..
+...
+....
+.....
+[ 97%] Building CXX object src/CMakeFiles/mmseqs-framework.dir/workflow/Linsearch.cpp.o
+[ 98%] Building CXX object src/CMakeFiles/mmseqs-framework.dir/workflow/Search.cpp.o
+[ 99%] Building CXX object src/CMakeFiles/mmseqs-framework.dir/workflow/EasyTaxonomy.cpp.o
+[100%] Built target mmseqs
+```
+
+```
+sudo make install
+
+[  1%] Built target microtar
+.
+..
+...
+[ 99%] Built target mmseqs-framework
+[100%] Built target version
+[100%] Built target mmseqs
+Install the project...
+-- Install configuration: "RELEASE"
+-- Installing: /usr/local/bin/mmseqs
+-- Set non-toolchain portion of runtime path of "/usr/local/bin/mmseqs" to ""
+-- Installing: /usr/local/util/bash-completion.sh
+```
+
+```
+mmseqs
+
+MMseqs2 (Many against Many sequence searching) is an open-source software suite for very fast, 
+parallelized protein sequence searches and clustering of huge protein sequence data sets.
+
+Please cite: M. Steinegger and J. Soding. MMseqs2 enables sensitive protein sequence searching for the analysis of massive data sets. Nature Biotechnology, doi:10.1038/nbt.3988 (2017).
+
+MMseqs2 Version: fed69f84d98a2f419693c3b41e0bdb5ad60f7aaa
+© Martin Steinegger (martin.steinegger@snu.ac.kr)
+
+usage: mmseqs <command> [<args>]
+
+Easy workflows for plain text input/output
+  easy-search       	Sensitive homology search
+  easy-cluster      	Slower, sensitive clustering
+  easy-linclust     	Fast linear time cluster, less sensitive clustering
+  easy-taxonomy     	Taxonomic classification
+  easy-rbh          	Find reciprocal best hit
+
+Main workflows for database input/output
+  search            	Sensitive homology search
+  map               	Map nearly identical sequences
+  rbh               	Reciprocal best hit search
+  linclust          	Fast, less sensitive clustering
+  cluster           	Slower, sensitive clustering
+  clusterupdate     	Update previous clustering with new sequences
+  taxonomy          	Taxonomic classification
+
+Input database creation
+  databases         	List and download databases
+  createdb          	Convert FASTA/Q file(s) to a sequence DB
+  createindex       	Store precomputed index on disk to reduce search overhead
+  convertmsa        	Convert Stockholm/PFAM MSA file to a MSA DB
+  msa2profile       	Convert a MSA DB to a profile DB
+
+Format conversion for downstream processing
+  convertalis       	Convert alignment DB to BLAST-tab, SAM or custom format
+  createtsv         	Convert result DB to tab-separated flat file
+  convert2fasta     	Convert sequence DB to FASTA format
+  taxonomyreport    	Create a taxonomy report in Kraken or Krona format
+
+An extended list of all modules can be obtained by calling 'mmseqs -h'.
+
+Bash completion for modules and parameters can be installed by adding "source MMSEQS_HOME/util/bash-completion.sh" to your "$HOME/.bash_profile".
+Include the location of the MMseqs2 binary in your "$PATH" environment variable.
+```
+
 ## Installation
 MMseqs2 can be used by [compiling from source](https://github.com/soedinglab/MMseqs2/wiki#installation), downloading a statically compiled binary at [mmseqs.com/latest](https://mmseqs.com/latest), using [Homebrew](https://github.com/Homebrew/brew), [conda](https://github.com/conda-forge/miniforge) or [Docker](https://github.com/moby/moby).
      
