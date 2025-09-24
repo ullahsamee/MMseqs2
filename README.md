@@ -118,6 +118,10 @@ Bash completion for modules and parameters can be installed by adding "source MM
 Include the location of the MMseqs2 binary in your "$PATH" environment variable.
 ```
 
+```
+echo "source /usr/local/util/bash-completion.sh" >> ~/.bashrc
+```
+
 ## Installation
 MMseqs2 can be used by [compiling from source](https://github.com/soedinglab/MMseqs2/wiki#installation), downloading a statically compiled binary at [mmseqs.com/latest](https://mmseqs.com/latest), using [Homebrew](https://github.com/Homebrew/brew), [conda](https://github.com/conda-forge/miniforge) or [Docker](https://github.com/moby/moby).
      
